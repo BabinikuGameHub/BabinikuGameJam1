@@ -10,6 +10,8 @@ public class YeomRockActions : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _playerRenderer;
     [SerializeField]
+    private Animator _playerAnim;
+    [SerializeField]
     private float _movementSpeed;
     [SerializeField]
     private float handleSpeed;
@@ -39,6 +41,10 @@ public class YeomRockActions : MonoBehaviour
 
     void ApplyMovement()
     {
+        if (_ctrl.PlayerMovement != Vector2.zero)
+            _playerAnim.SetBool("Move", true);
+        else
+            _playerAnim.SetBool("Move", false);
         _xVelocity = _ctrl.PlayerMovement.x * _movementSpeed;
         _yVelocity = _ctrl.PlayerMovement.y * _movementSpeed;
 
