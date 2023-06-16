@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class YeomRockActions : MonoBehaviour
 {
     private Rigidbody2D _rb;
     private YeomRockControl _ctrl;
-
+    [SerializeField]
+    private SpriteRenderer _playerRenderer;
     [SerializeField]
     private float _movementSpeed;
     [SerializeField]
@@ -47,6 +49,8 @@ public class YeomRockActions : MonoBehaviour
         var mouseAngle = Mathf.Atan2(_ctrl.PlayerLineOfSight.y, _ctrl.PlayerLineOfSight.x) * Mathf.Rad2Deg;
 
         //_handle.eulerAngles = Vector3.Lerp(mouseAngle, _handle.eulerAngles, Time.deltaTime);
+
+        _playerRenderer.flipX = _ctrl.PlayerLineOfSight.x > 0;
         _handle.eulerAngles = Mathf.LerpAngle(_handle.eulerAngles.z, mouseAngle, Time.deltaTime * handleSpeed) * Vector3.forward;
 
     }
