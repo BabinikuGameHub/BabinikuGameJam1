@@ -9,7 +9,8 @@ public class YeomRockActions : MonoBehaviour
 
     [SerializeField]
     private float _movementSpeed;
-
+    [SerializeField]
+    private Transform _handle;
     private float _xVelocity;
     private float _yVelocity;
 
@@ -29,6 +30,7 @@ public class YeomRockActions : MonoBehaviour
     void Update()
     {
         ApplyMovement();
+        ChangeLookPoint();
     }
 
     void ApplyMovement()
@@ -38,5 +40,11 @@ public class YeomRockActions : MonoBehaviour
 
         _rb.velocity = new Vector2(_xVelocity, _yVelocity);
     }
+    void ChangeLookPoint()
+    {
+        var mouseAngle = Vector3.forward * Mathf.Atan2(_ctrl.PlayerLineOfSight.y, _ctrl.PlayerLineOfSight.x) * Mathf.Rad2Deg;
+        
+        _handle.eulerAngles = Vector3.Lerp(mouseAngle, _handle.eulerAngles, Time.deltaTime);
 
+    }
 }
