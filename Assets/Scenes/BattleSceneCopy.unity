@@ -811,7 +811,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595872822}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.008952, y: 4.8220267, z: -1.350935}
+  m_LocalPosition: {x: 8.008952, y: 4.8220267, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -862,11 +862,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.62159157, y: 5.6101394}
-      - {x: -26.488123, y: 5.644346}
-      - {x: -26.539248, y: -16.400612}
-      - {x: 12.605228, y: -16.297012}
-      - {x: 12.6577015, y: 5.592547}
+    - - {x: 1.4146671, y: 12.020831}
+      - {x: -30.651766, y: 11.988951}
+      - {x: -30.570715, y: -17.325867}
+      - {x: 19.54464, y: -17.552715}
+      - {x: 19.59711, y: 11.871061}
   m_UseDelaunayMesh: 0
 --- !u!4 &731859602 stripped
 Transform:
@@ -16342,6 +16342,10 @@ PrefabInstance:
     - target: {fileID: 2915093109307506822, guid: 2e34a8c05ab485a43bd3f6e194a9752b, type: 3}
       propertyPath: m_Name
       value: 'UI '
+      objectReference: {fileID: 0}
+    - target: {fileID: 5103059996399925828, guid: 2e34a8c05ab485a43bd3f6e194a9752b, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6318553662732241148, guid: 2e34a8c05ab485a43bd3f6e194a9752b, type: 3}
       propertyPath: m_RootOrder
