@@ -16110,11 +16110,23 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5121292580597201925, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121292580597201925, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
+      propertyPath: m_Size.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121292580597201925, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 2d7faf8b9ba826a478cd641ce7087d70, type: 3}
     - target: {fileID: 5121292580597201925, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121292580597201925, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6541047415792811518, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
@@ -16643,6 +16655,7 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 6541047415792811518, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
   EnemyInfos:
   - {fileID: 11400000, guid: 71205323c903c604a932ba8f9f483031, type: 2}
+  - {fileID: 11400000, guid: cd307942a6722284eaba7e5f8ebd4669, type: 2}
   EnemySpawnPositions:
   - {fileID: 1179108741}
   - {fileID: 758472924}
@@ -16744,7 +16757,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

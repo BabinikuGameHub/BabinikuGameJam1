@@ -17,7 +17,7 @@ public class ProjectileScript : MonoBehaviour
 
     private void Update()
     {
-        if(_bulletLifeTime > 1f)
+        if(_bulletLifeTime > 2f)
         {
             Destroy(gameObject);
         }
