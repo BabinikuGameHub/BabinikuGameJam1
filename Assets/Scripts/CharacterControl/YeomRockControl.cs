@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +10,7 @@ public class YeomRockControl : MonoBehaviour
     private InputAction _moveAction;
     public Vector2 PlayerMovement;
     public Vector2 PlayerLineOfSight;
+    public Action lightThrowAction;
 
     // Start is called before the first frame update
     private void Awake()
@@ -21,7 +23,7 @@ public class YeomRockControl : MonoBehaviour
         _yControls.Player.Move.canceled += context => PlayerMovement = Vector2.zero;
 
         //라이트 던지기
-        _yControls.Player.ThrowLight.performed += context => LightThrow();
+        _yControls.Player.ThrowLight.started += context => lightThrowAction.Invoke();
 
     }
 

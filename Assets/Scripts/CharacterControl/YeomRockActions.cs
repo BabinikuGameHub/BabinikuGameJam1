@@ -19,6 +19,14 @@ public class YeomRockActions : MonoBehaviour
     private float _handleSpeed;
     [SerializeField]
     private Transform _handle;
+    [SerializeField]
+    private Transform _handLight;
+    [SerializeField]
+    private Animator _handLightAnim;
+    [SerializeField]
+    private Transform _hand;
+
+    bool isThrowing;
 
     // Start is called before the first frame update
     private void Awake()
@@ -29,7 +37,7 @@ public class YeomRockActions : MonoBehaviour
     void Start()
     {
         _ctrl = GetComponent<YeomRockControl>();
-        
+        _ctrl.lightThrowAction += LightThrow;
     }
 
     // Update is called once per frame
@@ -59,5 +67,32 @@ public class YeomRockActions : MonoBehaviour
         _playerRenderer.flipX = _ctrl.PlayerLineOfSight.x > 0;
         _handle.eulerAngles = Mathf.LerpAngle(_handle.eulerAngles.z, mouseAngle, Time.deltaTime * _handleSpeed) * Vector3.forward;
 
+    }
+    void LightThrow()
+    {
+        if (isThrowing) return;
+        isThrowing = true;
+        StartCoroutine(LighThrowCoroutine());
+    }
+    IEnumerator LighThrowCoroutine()
+    {
+        _handLight.parent = transform;
+        var StartAngle = _handLight.eulerAngles.z;
+        float timer = 0;
+        float throwTime = 1;
+        int lookPos = _playerRenderer.flipX ? 1 : -1;
+        _handLightAnim.SetTrigger("throw");
+        while (throwTime >= timer)
+        {
+            yield return null;
+            _handLightAnim.speed = throwTime;
+            _handLight.eulerAngles = Vector3.forward * Mathf.Lerp(StartAngle, StartAngle + (360f * lookPos), timer / throwTime);
+            //_handLightRig.
+
+            timer += Time.deltaTime;
+        }
+        _handLight.rotation = _hand.rotation;
+        _handLight.parent = _hand;
+        isThrowing = false;
     }
 }
