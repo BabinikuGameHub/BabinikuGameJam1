@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "EnemyData", menuName = "My Game/Enemy Data")]
 public class EnemyInfoSO : ScriptableObject
 {
-    EnemyType EnemyType;
-    int MonsterLevel;
+    public EnemyType EnemyType;
+    public int MonsterLevel;
 
-    float MovementSpeed;
-    float MinimumDistance = 20f;
-    float RateOfFire;
+    public float MovementSpeed;
+    public float MinimumDistance = 20f;
+    public float RateOfFire;
 
-    Sprite _aliveEnemySprite;
-    Sprite _deadEnemySprite;
+    public Sprite _aliveEnemySprite;
+    public Sprite _deadEnemySprite;
 
 }
