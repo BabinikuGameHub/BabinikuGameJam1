@@ -327,6 +327,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5084131325548427501, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5084131325548427501, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121292580597201925, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121292580597201925, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 580154325
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121292580597201925, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6541047415792811518, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
       propertyPath: m_Name
       value: MonsterBase

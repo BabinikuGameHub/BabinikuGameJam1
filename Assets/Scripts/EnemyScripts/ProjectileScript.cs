@@ -7,12 +7,19 @@ public class ProjectileScript : MonoBehaviour
     private Rigidbody2D _projectileRb;
     private Collider2D _collider;
     private float _bulletVelocity;
+    private float _fireRate;
+    private float _bulletLifeTime;
 
     // Start is called before the first frame update
     private void Awake()
     {
         _projectileRb = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
+    }
+
+    private void Update()
+    {
+
     }
 
     // Update is called once per frame
