@@ -8,11 +8,15 @@ public class EnemyInfoSO : ScriptableObject
     public EnemyType EnemyType;
     public int MonsterLevel;
 
+    public GameObject Projectile;
+    public float ProjectileSpeed;
+
     public float MovementSpeed;
     public float MinimumDistance = 20f;
     public float RateOfFire;
 
-    public Sprite _aliveEnemySprite;
-    public Sprite _deadEnemySprite;
+    public Sprite AliveEnemySprite;
+    public Sprite DeadEnemySprite;
+
 
 }

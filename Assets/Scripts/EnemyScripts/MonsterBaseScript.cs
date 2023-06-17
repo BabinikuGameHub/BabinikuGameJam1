@@ -10,26 +10,30 @@ public class MonsterBaseScript : MonoBehaviour
     private bool _isDead;
     private Vector2 _lineOfSight;
 
-    [SerializeField] private float _rateOfFire = 1f;
-    private float _rofCount = 0f;
-    [SerializeField] private GameObject _projectile;
-    [SerializeField] private float _projectileSpeed;
     [SerializeField] private SpriteRenderer _enemySpriteRenderer;
-    [SerializeField] private Sprite _aliveEnemySprite;
-    [SerializeField] private Sprite _deadEnemySprite;
-    [SerializeField] private EnemyType _enemyType;
-    [SerializeField] [Range (1,3)] private int _monsterLevel;
+
+    private EnemyInfoSO _enemyInfo;
+    private float _rateOfFire = 1f;
+    private float _rofCount = 0f;
+    private GameObject _projectile;
+    private float _projectileSpeed;
+    private Sprite _aliveEnemySprite;
+    private Sprite _deadEnemySprite;
+    private EnemyType _enemyType;
+    private int _monsterLevel;
     private int _monsterHealth;
-    [SerializeField] private float _movementSpeed;
-    [SerializeField] private float _minimumDistance;
+    private float _movementSpeed;
+    private float _minimumDistance;
 
 
     private void Awake()
     {
-        //_enemySpriteRenderer.sprite = _aliveEnemySprite;
         _collider = GetComponent<Collider2D>();
         _rb = GetComponent<Rigidbody2D>();
-        _monsterHealth = _monsterLevel;
+
+        if(_enemyInfo != null)
+            InitializeWithSO(_enemyInfo);
+
     }
 
     void Start()
@@ -59,6 +63,27 @@ public class MonsterBaseScript : MonoBehaviour
                 ApproachPlayer();
             }
         }
+    }
+
+    public void InitializeWithSO(EnemyInfoSO SOInfo)
+    {
+        _enemyInfo = SOInfo;
+
+        _enemyType = _enemyInfo.EnemyType;
+        _monsterLevel = _enemyInfo.MonsterLevel;
+        _monsterHealth = _monsterLevel;
+
+        _projectile = _enemyInfo.Projectile;
+        _projectileSpeed = _enemyInfo.ProjectileSpeed;
+
+        _movementSpeed = _enemyInfo.MovementSpeed;
+        _minimumDistance = _enemyInfo.MinimumDistance;
+        _rateOfFire = _enemyInfo.RateOfFire;
+
+        _aliveEnemySprite = _enemyInfo.AliveEnemySprite;
+        _deadEnemySprite = _enemyInfo.DeadEnemySprite;
+
+        _enemySpriteRenderer.sprite = _aliveEnemySprite;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
