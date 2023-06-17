@@ -60,4 +60,9 @@ public class YeomRockActions : MonoBehaviour
         _handle.eulerAngles = Mathf.LerpAngle(_handle.eulerAngles.z, mouseAngle, Time.deltaTime * handleSpeed) * Vector3.forward;
 
     }
+
+    void LightThrow()
+    {
+
+    }
 }
