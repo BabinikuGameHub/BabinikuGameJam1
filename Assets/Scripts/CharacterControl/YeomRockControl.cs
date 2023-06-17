@@ -10,7 +10,9 @@ public class YeomRockControl : MonoBehaviour
     private InputAction _moveAction;
     public Vector2 PlayerMovement;
     public Vector2 PlayerLineOfSight;
-    public Action lightThrowAction;
+    public Action LightThrowAction;
+    public Action BulletTime;
+    public Action FireBullet;
 
     // Start is called before the first frame update
     private void Awake()
@@ -23,18 +25,19 @@ public class YeomRockControl : MonoBehaviour
         _yControls.Player.Move.canceled += context => PlayerMovement = Vector2.zero;
 
         //라이트 던지기
-        _yControls.Player.ThrowLight.started += context => lightThrowAction.Invoke();
+        _yControls.Player.ThrowLight.started += context => LightThrowAction.Invoke();
+
+        //불렛타임. 단, 라이트 던지는 중에만 가능.
+        _yControls.Player.BulletTime.started += context => BulletTime.Invoke();
+
+        //총 발사. 불렛타임 중에만 가능
+        _yControls.Player.Fire.started += context => FireBullet.Invoke();
 
     }
 
     private void Update()
     {
         UpdateLoS();
-    }
-
-    private void LightThrow()
-    {
-
     }
 
     void UpdateLoS()

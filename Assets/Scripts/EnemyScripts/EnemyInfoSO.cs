@@ -8,7 +8,6 @@ public class EnemyInfoSO : ScriptableObject
     public EnemyType EnemyType;
     public int MonsterLevel;
 
-    public GameObject Projectile;
     public float ProjectileSpeed;
 
     public float MovementSpeed;
