@@ -199,6 +199,7 @@ MonoBehaviour:
   _helmet1: {fileID: 5607476124180436184}
   _helmet2: {fileID: 3798611237882695290}
   _projectile: {fileID: 4429220536746909403, guid: 25bf1d400a244dd44b47447a692c3904, type: 3}
+  _deadBodyMaterial: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
 --- !u!1 &6922437716269351384
 GameObject:
   m_ObjectHideFlags: 0

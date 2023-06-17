@@ -14,6 +14,7 @@ public class MonsterBaseScript : MonoBehaviour
     [SerializeField] private SpriteRenderer _helmet1;
     [SerializeField] private SpriteRenderer _helmet2;
     [SerializeField] private GameObject _projectile;
+    [SerializeField] private Material _deadBodyMaterial;
 
     private EnemyInfoSO _enemyInfo;
     private float _rateOfFire = 1f;
@@ -106,7 +107,6 @@ public class MonsterBaseScript : MonoBehaviour
             //근접공격은 염록이도 적도 상호 녹백
             actions.Knockback(_lineOfSight);
             Knockback();
-            //TakeDamage();
         }
     }
 
@@ -189,6 +189,7 @@ public class MonsterBaseScript : MonoBehaviour
         {
             //삭제가 아닌 시체 남긴체로 비활성화
             _enemySpriteRenderer.sprite = _deadEnemySprite;
+            _enemySpriteRenderer.material = _deadBodyMaterial;
             _collider.enabled = false;
             _rb.velocity = Vector2.zero;
             _isDead = true;
