@@ -97,20 +97,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "95f53dd098a04fef968b852937e1664c"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "31045f637d4a40768af8d38064498b60"
-                },
-                "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "d00accacf51a4563824b846e72721c66"
                 },
                 "m_SlotId": 2
@@ -830,10 +816,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1154.0,
-            "y": 0.00000699608244758565,
+            "x": -1207.0,
+            "y": 1.0000032186508179,
             "width": 129.0,
-            "height": 33.999996185302737
+            "height": 33.9999885559082
         }
     },
     "m_Slots": [
@@ -1114,9 +1100,9 @@
     "m_ShaderOutputName": "SpriteMask",
     "m_StageCapability": 2,
     "m_Value": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0,
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
         "w": 1.0
     },
     "m_DefaultValue": {
