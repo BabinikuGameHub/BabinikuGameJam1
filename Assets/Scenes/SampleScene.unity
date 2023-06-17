@@ -265,7 +265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326500499}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8949037, y: -0.8144343, z: -13.265026}
+  m_LocalPosition: {x: 3.21, y: -0.8144343, z: -13.265026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_Follow: {fileID: 501309935}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 11
@@ -484,7 +484,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8949037, y: -0.8144343, z: -13.265026}
+  m_LocalPosition: {x: 3.21, y: -0.8144343, z: -13.265026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -537,7 +537,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
+  m_UpdateMethod: 0
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
@@ -16347,6 +16347,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3870577549022149475, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
+      propertyPath: _monsterLevel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3870577549022149475, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
+      propertyPath: _deadEnemySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d8ec337d80a943e43bf5febb87b40354, type: 3}
     - target: {fileID: 6541047415792811518, guid: 50d82c9cfee03c642b41163a3ac17d72, type: 3}
       propertyPath: m_Name
       value: MonsterBase

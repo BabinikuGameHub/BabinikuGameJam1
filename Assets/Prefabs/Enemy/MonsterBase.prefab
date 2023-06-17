@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 5084131325548427501}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &5009247949850101437
 CapsuleCollider2D:
@@ -109,7 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 572a1c3dea95fd740ada7d4dcff25aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemySpriteRenderer: {fileID: 5121292580597201925}
   _enemyType: 0
+  _monsterLevel: 0
   _movementSpeed: 5
 --- !u!1 &6922437716269351384
 GameObject:
