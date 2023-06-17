@@ -7,6 +7,8 @@ public class YeomRockActions : MonoBehaviour
 {
     private Rigidbody2D _rb;
     private YeomRockControl _ctrl;
+    private float _xVelocity;
+    private float _yVelocity;
     [SerializeField]
     private SpriteRenderer _playerRenderer;
     [SerializeField]
@@ -17,8 +19,6 @@ public class YeomRockActions : MonoBehaviour
     private float _handleSpeed;
     [SerializeField]
     private Transform _handle;
-    private float _xVelocity;
-    private float _yVelocity;
 
     // Start is called before the first frame update
     private void Awake()
@@ -58,11 +58,6 @@ public class YeomRockActions : MonoBehaviour
 
         _playerRenderer.flipX = _ctrl.PlayerLineOfSight.x > 0;
         _handle.eulerAngles = Mathf.LerpAngle(_handle.eulerAngles.z, mouseAngle, Time.deltaTime * _handleSpeed) * Vector3.forward;
-
-    }
-
-    void LightThrow()
-    {
 
     }
 }
