@@ -11,11 +11,11 @@ public class MonsterBaseScript : MonoBehaviour
     private Vector2 _lineOfSight;
 
     [SerializeField] private SpriteRenderer _enemySpriteRenderer;
+    [SerializeField] private GameObject _projectile;
 
     private EnemyInfoSO _enemyInfo;
     private float _rateOfFire = 1f;
     private float _rofCount = 0f;
-    private GameObject _projectile;
     private float _projectileSpeed;
     private Sprite _aliveEnemySprite;
     private Sprite _deadEnemySprite;
@@ -76,7 +76,6 @@ public class MonsterBaseScript : MonoBehaviour
         _monsterLevel = _enemyInfo.MonsterLevel;
         _monsterHealth = _monsterLevel;
 
-        _projectile = _enemyInfo.Projectile;
         _projectileSpeed = _enemyInfo.ProjectileSpeed;
 
         _movementSpeed = _enemyInfo.MovementSpeed;
@@ -93,7 +92,11 @@ public class MonsterBaseScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            UIHPScript.Instance.TestDamage();
+            YeomRockActions actions = collision.gameObject.GetComponent<YeomRockActions>();
+            actions.ApplyDamage();
+
+            //근접공격은 염록이도 적도 상호 녹백
+            actions.Knockback(_lineOfSight);
             Knockback();
             //TakeDamage();
         }
@@ -158,8 +161,9 @@ public class MonsterBaseScript : MonoBehaviour
 
     public void TakeDamage()
     {
+        Debug.Log("EnemyHit");
         _monsterHealth--;
-
+        Knockback();
         CheckDeath();
     }
 

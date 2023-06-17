@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpriteRenderer: {fileID: 5121292580597201925}
+  _projectile: {fileID: 4429220536746909403, guid: 25bf1d400a244dd44b47447a692c3904, type: 3}
 --- !u!1 &6922437716269351384
 GameObject:
   m_ObjectHideFlags: 0

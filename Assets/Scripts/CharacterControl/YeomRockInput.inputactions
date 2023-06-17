@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AimShot",
+                    "name": "BulletTime",
                     "type": "Button",
                     "id": "6cb0b6ba-c5c2-4b9b-809d-4aff68d39cc4",
                     "expectedControlType": "Button",
@@ -286,11 +286,11 @@
                 {
                     "name": "",
                     "id": "7e2de58d-ec34-4204-803d-cfcb92bb1f88",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "AimShot",
+                    "action": "BulletTime",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

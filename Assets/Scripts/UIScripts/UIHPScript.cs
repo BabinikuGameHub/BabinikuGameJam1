@@ -22,9 +22,7 @@ public class UIHPScript : MonoBehaviour
     void Start()
     {
         _yeomRock = GameObject.FindWithTag("Player").GetComponent<YeomRockActions>();
-        //_yeomRockHealth = _yeomRock.Health;
-        //TODO: 나중에 꼭 지워! 5는 임시야!!
-        _yeomRockHealth = 5;
+        _yeomRockHealth = _yeomRock.Health;
 
         for (int i = 0; i < _yeomRockHealth; i++)
         {

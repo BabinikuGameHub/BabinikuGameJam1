@@ -64,7 +64,7 @@ public partial class @YeomRockInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""AimShot"",
+                    ""name"": ""BulletTime"",
                     ""type"": ""Button"",
                     ""id"": ""6cb0b6ba-c5c2-4b9b-809d-4aff68d39cc4"",
                     ""expectedControlType"": ""Button"",
@@ -308,11 +308,11 @@ public partial class @YeomRockInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7e2de58d-ec34-4204-803d-cfcb92bb1f88"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""AimShot"",
+                    ""action"": ""BulletTime"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -904,7 +904,7 @@ public partial class @YeomRockInput: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_ThrowLight = m_Player.FindAction("ThrowLight", throwIfNotFound: true);
-        m_Player_AimShot = m_Player.FindAction("AimShot", throwIfNotFound: true);
+        m_Player_BulletTime = m_Player.FindAction("BulletTime", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -982,7 +982,7 @@ public partial class @YeomRockInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_ThrowLight;
-    private readonly InputAction m_Player_AimShot;
+    private readonly InputAction m_Player_BulletTime;
     public struct PlayerActions
     {
         private @YeomRockInput m_Wrapper;
@@ -991,7 +991,7 @@ public partial class @YeomRockInput: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @ThrowLight => m_Wrapper.m_Player_ThrowLight;
-        public InputAction @AimShot => m_Wrapper.m_Player_AimShot;
+        public InputAction @BulletTime => m_Wrapper.m_Player_BulletTime;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1013,9 +1013,9 @@ public partial class @YeomRockInput: IInputActionCollection2, IDisposable
             @ThrowLight.started += instance.OnThrowLight;
             @ThrowLight.performed += instance.OnThrowLight;
             @ThrowLight.canceled += instance.OnThrowLight;
-            @AimShot.started += instance.OnAimShot;
-            @AimShot.performed += instance.OnAimShot;
-            @AimShot.canceled += instance.OnAimShot;
+            @BulletTime.started += instance.OnBulletTime;
+            @BulletTime.performed += instance.OnBulletTime;
+            @BulletTime.canceled += instance.OnBulletTime;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1032,9 +1032,9 @@ public partial class @YeomRockInput: IInputActionCollection2, IDisposable
             @ThrowLight.started -= instance.OnThrowLight;
             @ThrowLight.performed -= instance.OnThrowLight;
             @ThrowLight.canceled -= instance.OnThrowLight;
-            @AimShot.started -= instance.OnAimShot;
-            @AimShot.performed -= instance.OnAimShot;
-            @AimShot.canceled -= instance.OnAimShot;
+            @BulletTime.started -= instance.OnBulletTime;
+            @BulletTime.performed -= instance.OnBulletTime;
+            @BulletTime.canceled -= instance.OnBulletTime;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1221,7 +1221,7 @@ public partial class @YeomRockInput: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnThrowLight(InputAction.CallbackContext context);
-        void OnAimShot(InputAction.CallbackContext context);
+        void OnBulletTime(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
