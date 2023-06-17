@@ -14,7 +14,7 @@ public class YeomRockActions : MonoBehaviour
     [SerializeField]
     private float _movementSpeed;
     [SerializeField]
-    private float handleSpeed;
+    private float _handleSpeed;
     [SerializeField]
     private Transform _handle;
     private float _xVelocity;
@@ -57,7 +57,7 @@ public class YeomRockActions : MonoBehaviour
         //_handle.eulerAngles = Vector3.Lerp(mouseAngle, _handle.eulerAngles, Time.deltaTime);
 
         _playerRenderer.flipX = _ctrl.PlayerLineOfSight.x > 0;
-        _handle.eulerAngles = Mathf.LerpAngle(_handle.eulerAngles.z, mouseAngle, Time.deltaTime * handleSpeed) * Vector3.forward;
+        _handle.eulerAngles = Mathf.LerpAngle(_handle.eulerAngles.z, mouseAngle, Time.deltaTime * _handleSpeed) * Vector3.forward;
 
     }
 }

@@ -5,20 +5,23 @@ using UnityEngine;
 public class ProjectileScript : MonoBehaviour
 {
     private Rigidbody2D _projectileRb;
-    private Collider2D _collider;
     private float _bulletVelocity;
-    private float _fireRate;
     private float _bulletLifeTime;
 
     // Start is called before the first frame update
     private void Awake()
     {
+        _bulletLifeTime = 0.0f;
         _projectileRb = GetComponent<Rigidbody2D>();
-        _collider = GetComponent<Collider2D>();
     }
 
     private void Update()
     {
+        if(_bulletLifeTime > 1f)
+        {
+            Destroy(gameObject);
+        }
+        _bulletLifeTime += Time.deltaTime;
 
     }
 
