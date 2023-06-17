@@ -48,6 +48,7 @@ public class YeomRockActions : MonoBehaviour
     bool isThrowing;
     bool isBulletTime;
     bool isReloading;
+    bool isHitInvulnerable;
 
     // Start is called before the first frame update
     private void Awake()
@@ -65,7 +66,6 @@ public class YeomRockActions : MonoBehaviour
         _ctrl.BulletTime += BulletTime;
         _ctrl.FireBullet += FireAtPosition;
 
-
     }
 
     // Update is called once per frame
@@ -77,13 +77,27 @@ public class YeomRockActions : MonoBehaviour
 
     public void ApplyDamage()
     {
+        if (isHitInvulnerable) return;
+
         Health--;
         UIHPScript.Instance.UpdateHealth(Health);
         CheckDeath();
+        StartCoroutine(HitInvulnerable());
+    }
+
+    IEnumerator HitInvulnerable()
+    {
+        isHitInvulnerable = true;
+        Debug.Log("피격무적");
+
+        yield return new WaitForSeconds(1f);
+        isHitInvulnerable = false;
+        Debug.Log("무적풀림");
     }
 
     public void Knockback(Vector2 Direction)
     {
+        if (isHitInvulnerable) return;
         _rb.AddForce(Direction * 2000f);
     }
 
@@ -113,8 +127,6 @@ public class YeomRockActions : MonoBehaviour
     void ChangeLookPoint()
     {
         var mouseAngle = Mathf.Atan2(_ctrl.PlayerLineOfSight.y, _ctrl.PlayerLineOfSight.x) * Mathf.Rad2Deg;
-
-        //_handle.eulerAngles = Vector3.Lerp(mouseAngle, _handle.eulerAngles, Time.deltaTime);
 
         _playerRenderer.flipX = _ctrl.PlayerLineOfSight.x > 0;
         _handle.eulerAngles = Mathf.LerpAngle(_handle.eulerAngles.z, mouseAngle, Time.deltaTime * _handleSpeed) * Vector3.forward;
@@ -191,7 +203,6 @@ public class YeomRockActions : MonoBehaviour
             CursorController.instance.SetToBasicCursor();
             Time.timeScale = 1f;
             isBulletTime = false;
-            Debug.Log("Bullet Time Cancelled");
         }
     }
 
@@ -254,9 +265,6 @@ public class YeomRockActions : MonoBehaviour
             yield return new WaitForSecondsRealtime(_reloadTime);
         }
 
-
-        //yield return new WaitForSecondsRealtime(_reloadTime);
-        //BulletCylinderScript.Instance.UpdateMagazine(_remainingAmmo);
         BulletCylinderScript.Instance.ChangeGreen();
         _remainingAmmo = 6;
         isReloading = false;

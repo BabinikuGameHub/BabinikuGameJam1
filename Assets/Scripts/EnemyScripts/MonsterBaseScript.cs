@@ -11,6 +11,8 @@ public class MonsterBaseScript : MonoBehaviour
     private Vector2 _lineOfSight;
 
     [SerializeField] private SpriteRenderer _enemySpriteRenderer;
+    [SerializeField] private SpriteRenderer _helmet1;
+    [SerializeField] private SpriteRenderer _helmet2;
     [SerializeField] private GameObject _projectile;
 
     private EnemyInfoSO _enemyInfo;
@@ -31,8 +33,10 @@ public class MonsterBaseScript : MonoBehaviour
     {
         _collider = GetComponent<Collider2D>();
         _rb = GetComponent<Rigidbody2D>();
+        _helmet1.enabled = false;
+        _helmet2.enabled = false;
 
-        if(_enemyInfo != null)
+        if (_enemyInfo != null)
             InitializeWithSO(_enemyInfo);
 
     }
@@ -75,6 +79,10 @@ public class MonsterBaseScript : MonoBehaviour
         _enemyType = _enemyInfo.EnemyType;
         _monsterLevel = _enemyInfo.MonsterLevel;
         _monsterHealth = _monsterLevel;
+        if(_monsterLevel > 1)
+            _helmet1.enabled = true;
+        if(_monsterLevel > 2)
+            _helmet2.enabled = true;
 
         _projectileSpeed = _enemyInfo.ProjectileSpeed;
 
@@ -163,6 +171,12 @@ public class MonsterBaseScript : MonoBehaviour
     {
         Debug.Log("EnemyHit");
         _monsterHealth--;
+
+        if (_monsterHealth < 3)
+            _helmet2.enabled = false;
+        if (_monsterHealth < 2)
+            _helmet1.enabled = false;
+
         Knockback();
         CheckDeath();
     }
