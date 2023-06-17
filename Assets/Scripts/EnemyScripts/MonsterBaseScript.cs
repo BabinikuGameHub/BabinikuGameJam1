@@ -24,6 +24,7 @@ public class MonsterBaseScript : MonoBehaviour
     private int _monsterHealth;
     private float _movementSpeed;
     private float _minimumDistance;
+    private bool _isKnockedBack;
 
 
     private void Awake()
@@ -45,6 +46,8 @@ public class MonsterBaseScript : MonoBehaviour
     void Update()
     {
         if (_isDead) return;
+
+        if(!_isKnockedBack) _rb.velocity = Vector2.zero;
 
         UpdateLineOfSight();
 
@@ -88,7 +91,30 @@ public class MonsterBaseScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        TakeDamage();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            UIHPScript.Instance.TestDamage();
+            Knockback();
+            //TakeDamage();
+        }
+    }
+
+    private void Knockback()
+    {
+        Vector2 knockbackDirection = new Vector2(-_lineOfSight.x, -_lineOfSight.y);
+
+        _rb.AddForce(knockbackDirection * 1500f);
+
+        _isKnockedBack = true;
+        StartCoroutine(ResetRB());
+    }
+
+    private IEnumerator ResetRB()
+    {
+        yield return new WaitForSeconds(0.15f);
+        _rb.velocity = Vector2.zero;
+
+        _isKnockedBack = false;
     }
 
     void UpdateLineOfSight()

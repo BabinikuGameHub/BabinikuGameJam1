@@ -39,6 +39,7 @@ public class ProjectileScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            UIHPScript.Instance.TestDamage();
             //염록이랑 충돌
             //염록이 데미지
             Destroy(gameObject);

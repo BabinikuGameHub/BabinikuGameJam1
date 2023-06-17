@@ -5,16 +5,25 @@ using UnityEngine.UI;
 
 public class UIHPScript : MonoBehaviour
 {
+    public static UIHPScript Instance;
+
     private YeomRockActions _yeomRock;
     private int _yeomRockHealth;
     [SerializeField] private GameObject _hpIconPrefab;
 
     private List<GameObject> _hpIcons = new();
 
+    private void Awake()
+    {
+        if(Instance == null)
+            Instance = this;
+    }
+
     void Start()
     {
         _yeomRock = GameObject.FindWithTag("Player").GetComponent<YeomRockActions>();
         //_yeomRockHealth = _yeomRock.Health;
+        //TODO: 나중에 꼭 지워! 5는 임시야!!
         _yeomRockHealth = 5;
 
         for (int i = 0; i < _yeomRockHealth; i++)
@@ -23,6 +32,11 @@ public class UIHPScript : MonoBehaviour
             _hpIcons.Add(hpIcon);
         }
 
+    }
+    public void TestDamage()
+    {
+        _yeomRockHealth--;
+        UpdateHealth(_yeomRockHealth);
     }
 
     public void UpdateHealth(int health)
@@ -35,11 +49,11 @@ public class UIHPScript : MonoBehaviour
             Image hpIcon = _hpIcons[i].GetComponent<Image>();
             if (i < _yeomRockHealth)
             {
-                hpIcon.enabled = false;
+                hpIcon.enabled = true;
             }
             else
             {
-                hpIcon.enabled = true;
+                hpIcon.enabled = false;
             }
         }
 
