@@ -18,18 +18,25 @@ public class YeomRockActions : MonoBehaviour
     [SerializeField]
     private Animator _playerAnim;
     [SerializeField]
-    private float _movementSpeed;
-    [SerializeField]
-    private float _handleSpeed;
-    [SerializeField]
     private Transform _handle;
     [SerializeField]
     private Transform _handLight;
+    [SerializeField]
+    private Transform _throwLight;
     [SerializeField]
     private Animator _handLightAnim;
     [SerializeField]
     private Transform _hand;
 
+    [Header("세팅")]
+    [SerializeField]
+    private float _movementSpeed;
+    [SerializeField]
+    private float _handleSpeed;
+    [SerializeField]
+    private float _throwTime;
+    [SerializeField]
+    private int _throwCycle;
     [SerializeField]
     public int Health;
     [SerializeField]
@@ -140,22 +147,27 @@ public class YeomRockActions : MonoBehaviour
     }
     IEnumerator LighThrowCoroutine()
     {
-        _handLight.parent = transform;
+        //_handLight.parent = transform;
+        _throwLight.gameObject.SetActive(true);
+        _handLight.gameObject.SetActive(false);
         var StartAngle = _handLight.eulerAngles.z;
         float timer = 0;
-        float throwTime = 1;
         int lookPos = _playerRenderer.flipX ? 1 : -1;
+
         _handLightAnim.SetTrigger("throw");
-        while (throwTime >= timer)
+        while (_throwTime >= timer)
         {
             yield return null;
-            _handLightAnim.speed = throwTime;
-            _handLight.eulerAngles = Vector3.forward * Mathf.Lerp(StartAngle, StartAngle + (360f * lookPos), timer / throwTime);
+            _handLightAnim.speed = 1 / _throwTime;
+            _throwLight.eulerAngles = Vector3.forward * Mathf.Lerp(StartAngle, StartAngle + (360f * lookPos * _throwCycle), timer / _throwTime);
 
             timer += Time.deltaTime;
         }
-        _handLight.rotation = _hand.rotation;
-        _handLight.parent = _hand;
+        //_handLight.rotation = _hand.rotation;
+        //_handLight.parent = _hand;
+        _throwLight.gameObject.SetActive(false);
+        _handLight.gameObject.SetActive(true);
+
         isThrowing = false;
     }
 
