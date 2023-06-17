@@ -26,7 +26,7 @@ public class MonsterBaseScript : MonoBehaviour
 
     private void Awake()
     {
-        _enemySpriteRenderer.sprite = _aliveEnemySprite;
+        //_enemySpriteRenderer.sprite = _aliveEnemySprite;
         _collider = GetComponent<Collider2D>();
         _rb = GetComponent<Rigidbody2D>();
         _monsterHealth = _monsterLevel;
@@ -46,6 +46,7 @@ public class MonsterBaseScript : MonoBehaviour
 
         if (_enemyType == EnemyType.Close)
         {//근접타입이면 단순 접근 행동
+            ApproachPlayer();
         }
         else
         {//원거리타입이면 최소거리 접근 후 원거리 공격

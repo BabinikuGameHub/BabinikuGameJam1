@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3870577549022149475}
   m_Layer: 0
   m_Name: MonsterBase
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,8 +113,9 @@ MonoBehaviour:
   _projectile: {fileID: 4429220536746909403, guid: 25bf1d400a244dd44b47447a692c3904, type: 3}
   _projectileSpeed: 30
   _enemySpriteRenderer: {fileID: 5121292580597201925}
+  _aliveEnemySprite: {fileID: 21300000, guid: 5720eb820aabad44492a6cbcc94e90af, type: 3}
   _deadEnemySprite: {fileID: 21300000, guid: d8ec337d80a943e43bf5febb87b40354, type: 3}
-  _enemyType: 1
+  _enemyType: 0
   _monsterLevel: 0
   _movementSpeed: 5
   _minimumDistance: 25
