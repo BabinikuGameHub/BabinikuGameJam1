@@ -10,6 +10,8 @@ public class MonsterBaseScript : MonoBehaviour
     private bool _isDead;
     private Vector2 _lineOfSight;
 
+    [SerializeField] private GameObject _projectile;
+    [SerializeField] private float _projectileSpeed;
     [SerializeField] private SpriteRenderer _enemySpriteRenderer;
     [SerializeField] private Sprite _deadEnemySprite;
     [SerializeField] private EnemyType _enemyType;
@@ -63,13 +65,14 @@ public class MonsterBaseScript : MonoBehaviour
 
     void ApproachPlayer()
     {
-        float step = _movementSpeed * Time.deltaTime;
-
-        transform.position = Vector2.MoveTowards(transform.position, _yeomRock.transform.position, step);
+        transform.position = Vector2.MoveTowards(transform.position, _yeomRock.transform.position, _movementSpeed * Time.deltaTime);
     }
 
     void ShootPlayer()
     {
+        GameObject projectile = Instantiate(_projectile, transform.position, Quaternion.identity);
+        ProjectileScript pScript = projectile.GetComponent<ProjectileScript>();
+        pScript.SetTrajectory(_lineOfSight, _projectileSpeed);
 
     }
 
@@ -82,16 +85,16 @@ public class MonsterBaseScript : MonoBehaviour
 
     private void CheckDeath()
     {
+        //적이 사망하면 시체는 어두워도 보이게 처리
+
         if(_monsterHealth <= 0)
         {
-            Debug.Log("죽음");
             //삭제가 아닌 시체 남긴체로 비활성화
             _enemySpriteRenderer.sprite = _deadEnemySprite;
             _collider.enabled = false;
             _rb.velocity = Vector2.zero;
             _isDead = true;
         }
-            
     }
 }
 
