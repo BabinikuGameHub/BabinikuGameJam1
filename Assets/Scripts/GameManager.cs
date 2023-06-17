@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,13 +8,17 @@ public class GameManager : MonoBehaviour
 {
     private GameObject _yeomRock;
 
-    public GameObject EnemyPrefab;
-    public List<EnemyInfoSO> EnemyInfos;
-    public List<Transform> EnemySpawnPositions;
+    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private List<EnemyInfoSO> _enemyInfos;
+    [SerializeField] private GameObject _spawnPositionsParent;
+    [SerializeField] private List<Transform> _enemySpawnPositions;
 
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+
+        _enemySpawnPositions = _spawnPositionsParent.GetComponentsInChildren<Transform>().ToList();
+
     }
 
     private void Start()
@@ -23,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void SpawnEnemies()
     {
-        foreach(Transform position in EnemySpawnPositions)
+        foreach(Transform position in _enemySpawnPositions)
         {
             SpawnEnemyAtPosition(position);
         }
@@ -31,10 +36,10 @@ public class GameManager : MonoBehaviour
 
     public void SpawnEnemyAtPosition(Transform SpawnPoint)
     {
-        GameObject SpawnedEnemy = Instantiate(EnemyPrefab, SpawnPoint);
+        GameObject SpawnedEnemy = Instantiate(_enemyPrefab, SpawnPoint);
         MonsterBaseScript baseScript = SpawnedEnemy.GetComponent<MonsterBaseScript>();
-        int index = Random.Range(0, EnemyInfos.Count);
-        baseScript.InitializeWithSO(EnemyInfos[index]);
+        int index = Random.Range(0, _enemyInfos.Count);
+        baseScript.InitializeWithSO(_enemyInfos[index]);
     }
 
 }
