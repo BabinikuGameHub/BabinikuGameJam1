@@ -818,5 +818,5 @@ MonoBehaviour:
   _playerRenderer: {fileID: 3630450638442919278}
   _playerAnim: {fileID: 4565135032896375260}
   _movementSpeed: 10
-  handleSpeed: 10
+  _handleSpeed: 10
   _handle: {fileID: 8038715612418410833}
