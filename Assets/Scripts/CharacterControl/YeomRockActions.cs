@@ -38,6 +38,8 @@ public class YeomRockActions : MonoBehaviour
     private GameObject _hitCorrectFX;
     [SerializeField]
     private GameObject _hitMissFX;
+    [SerializeField]
+    private AudioSource _shootSFX;
 
     [Header("세팅")]
     [SerializeField]
@@ -273,7 +275,10 @@ public class YeomRockActions : MonoBehaviour
             Instantiate(effect).transform.position = hitPosition;
         }
         if (_firePositions.Count > 0)
+        {
             Instantiate(_shootFX).transform.position = _hand.position;
+            _shootSFX.Play();
+        }
         foreach(GameObject hitMarker in _hitMarkerList)
         {
             Destroy(hitMarker);
