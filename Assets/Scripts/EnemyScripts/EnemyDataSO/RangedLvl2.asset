@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyType: 1
   MonsterLevel: 2
-  ProjectileSpeed: 20
-  MovementSpeed: 5
+  ProjectileSpeed: 10
+  MovementSpeed: 0.3
   MinimumDistance: 15
-  RateOfFire: 1
+  RateOfFire: 2
   AliveEnemySprite: {fileID: 21300000, guid: ec3a8c212443b1b4ea068de64858017d, type: 3}
   DeadEnemySprite: {fileID: 21300000, guid: d83653da068eefc4d9f296d26aa62fd8, type: 3}
