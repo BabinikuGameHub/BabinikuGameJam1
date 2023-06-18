@@ -1,12 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
-using UnityEditorInternal.VersionControl;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -58,6 +54,12 @@ public class GameManager : MonoBehaviour
         BGMSource.Play();
     }
 
+    public void EnemyDied()
+    {
+        EnemyCount--;
+        UpdateEnemyCountUI();
+    }
+
     public void UpdateEnemyCountUI()
     {
         mainUI.enemyCount = EnemyCount;
@@ -92,8 +94,7 @@ public class GameManager : MonoBehaviour
     IEnumerator StageClearSequence()
     {
         //Stage Clear UI
-        //오우예아 음성?
-        LightControl.intensity = 1f;
+        LightControl.intensity = 0.9f;
         effectSource.PlayOneShot(clearSFX);
         StartCoroutine(mainUI.StageClearCoroutine());
 

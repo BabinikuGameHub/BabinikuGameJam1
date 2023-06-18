@@ -65,6 +65,9 @@ public class YeomRockActions : MonoBehaviour
     [SerializeField]
     private GameObject _hitMarkerPrefab;
 
+    [SerializeField]
+    private UnityEngine.Rendering.Universal.Light2D _spotLight;
+
     private int _remainingAmmo;
     private Coroutine _bulletTimeCoroutine;
     private List<Vector2> _firePositions;
@@ -113,14 +116,14 @@ public class YeomRockActions : MonoBehaviour
     {
         float InvTime = 1;
         isHitInvulnerable = true;
-        Debug.Log("피격무적");
+        _spotLight.enabled = true;
         _playerAnim.SetTrigger("hurt");
         _playerASource.clip = _damagedSFX;
         _playerASource.Play();
         yield return new WaitForSeconds(InvTime);
         isHitInvulnerable = false;
+        _spotLight.enabled = false;
         _playerAnim.SetTrigger("hurtEnd");
-        Debug.Log("무적풀림");
     }
 
     public void Knockback(Vector2 Direction)
@@ -174,6 +177,7 @@ public class YeomRockActions : MonoBehaviour
     }
     IEnumerator LighThrowCoroutine()
     {
+        _spotLight.enabled = false;
         //_handLight.parent = transform;
         _throwLight.gameObject.SetActive(true);
         _handLight.gameObject.SetActive(false);
@@ -195,6 +199,7 @@ public class YeomRockActions : MonoBehaviour
         _throwLight.gameObject.SetActive(false);
         _handLight.gameObject.SetActive(true);
 
+        _spotLight.enabled = true;
         isThrowing = false;
     }
 
@@ -261,37 +266,57 @@ public class YeomRockActions : MonoBehaviour
 
     public void ResolveFire()
     {
+        float gunfireOffset = 0.0f;
+
         foreach(Vector2 hitPosition in _firePositions)
         {
-            //포지션에 총기 이펙트
-            Collider2D[] rangeChecks = Physics2D.OverlapCircleAll(hitPosition, _hitRadius);
-            GameObject effect = _hitMissFX;
-            if(rangeChecks.Length > 0)
-            {
-                foreach(Collider2D collider in rangeChecks.ToList())
-                {
-                    if (collider.gameObject.CompareTag("Enemy"))
-                    {
-                        MonsterBaseScript mBaseScript = collider.gameObject.GetComponent<MonsterBaseScript>();
-                        mBaseScript.TakeDamage();
-                        effect = _hitCorrectFX;
-                    }
-                }
-            }
-            Instantiate(effect).transform.position = hitPosition;
+            StartCoroutine(GunFireCoroutine(hitPosition, gunfireOffset));
+
+            gunfireOffset += 0.15f;
         }
-        if (_firePositions.Count > 0)
-        {
-            Instantiate(_shootFX).transform.position = _hand.position;
-            _gunASource.Play();
-        }
-        foreach(GameObject hitMarker in _hitMarkerList)
+
+
+        //StartCoroutine(LightsBackOnTiming(gunfireOffset));
+
+        foreach (GameObject hitMarker in _hitMarkerList)
         {
             Destroy(hitMarker);
         }
+
+
         _hitMarkerList = new();
         _firePositions.Clear();
         ReloadSequence();
+
+    }
+
+    IEnumerator GunFireCoroutine(Vector2 hitPosition, float gunfireOffset)
+    {
+        Collider2D[] rangeChecks = Physics2D.OverlapCircleAll(hitPosition, _hitRadius);
+        GameObject effect = _hitMissFX;
+        if (rangeChecks.Length > 0)
+        {
+            foreach (Collider2D collider in rangeChecks.ToList())
+            {
+                if (collider.gameObject.CompareTag("Enemy"))
+                {
+                    MonsterBaseScript mBaseScript = collider.gameObject.GetComponent<MonsterBaseScript>();
+                    mBaseScript.TakeDamage();
+                    effect = _hitCorrectFX;
+                }
+            }
+        }
+
+        yield return new WaitForSecondsRealtime(gunfireOffset);
+        Instantiate(effect).transform.position = hitPosition;
+        Instantiate(_shootFX).transform.position = _hand.position;
+        _gunASource.Play();
+    }
+
+    IEnumerator LightsBackOnTiming(float offsetTime)
+    {
+        yield return new WaitForSecondsRealtime(offsetTime);
+        _spotLight.enabled = true;
 
     }
 

@@ -9,8 +9,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera _cam;
     [SerializeField] private GameObject _playerSpawnPosition;
     [SerializeField] private GameObject _spawnPositionsParent;
+    [SerializeField] private Bounds _mapbounds;
     private List<Transform> _enemySpawnPositions;
-    private List<MonsterBaseScript> _enemyList;
+    private List<GameObject> _enemyList;
 
     void Awake()
     {
@@ -28,7 +29,8 @@ public class SpawnManager : MonoBehaviour
         if (_spawnPositionsParent == null || _enemySpawnPositions.Count == 0)
             return;
 
-        StartCoroutine(SpawnEnemies());
+        SpawnEnemies();
+        //StartCoroutine(SpawnEnemies());
     }
 
     private void SpawnYeomRock()
@@ -39,23 +41,34 @@ public class SpawnManager : MonoBehaviour
         UIHPScript.Instance.InstantiateWYeom(Yeom);
     }
 
-    private IEnumerator SpawnEnemies()
+    private void SpawnEnemies()
     {
         foreach (Transform position in _enemySpawnPositions)
         {
-            yield return new WaitForSeconds(0.3f);
             SpawnEnemyAtPosition(position);
             GameManager.Instance.EnemyCount = _enemyList.Count;
             GameManager.Instance.UpdateEnemyCountUI();
         }
+
+        GameManager.Instance.EnemyCount = _enemyList.Count;
+        GameManager.Instance.UpdateEnemyCountUI();
     }
 
     public void SpawnEnemyAtPosition(Transform SpawnPoint)
     {
+        SpawnPoint.position = new Vector2(SpawnPoint.position.x, SpawnPoint.position.y);
+
         GameObject SpawnedEnemy = Instantiate(GameManager.Instance.EnemyPrefab, SpawnPoint);
         MonsterBaseScript baseScript = SpawnedEnemy.GetComponent<MonsterBaseScript>();
 
-        _enemyList.Add(baseScript);
+        if(SpawnedEnemy != null)
+        {
+            _enemyList.Add(SpawnedEnemy);
+        }
+        else
+        {
+            Debug.Log("Spawn error");
+        }
 
         int index = Random.Range(0, GameManager.Instance.EnemyInfos.Count);
         baseScript.InitializeWithSO(GameManager.Instance.EnemyInfos[index]);

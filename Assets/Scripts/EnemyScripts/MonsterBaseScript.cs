@@ -116,7 +116,7 @@ public class MonsterBaseScript : MonoBehaviour
     {
         Vector2 knockbackDirection = new Vector2(-_lineOfSight.x, -_lineOfSight.y);
 
-        _rb.AddForce(knockbackDirection * 1500f);
+        _rb.AddForce(knockbackDirection * 500f);
 
         _isKnockedBack = true;
         StartCoroutine(ResetRB());
@@ -173,7 +173,6 @@ public class MonsterBaseScript : MonoBehaviour
 
     public void TakeDamage()
     {
-        Debug.Log("EnemyHit");
         _monsterHealth--;
 
         if (_monsterHealth < 3)
@@ -201,9 +200,11 @@ public class MonsterBaseScript : MonoBehaviour
             // 적 카운트를 현재 나온 적들의 isDead가 false인 녀석들을 찾아서 업데이트 하는 방식. 확실한 방법이나, Find시스템상 오래 걸릴 수 있는 방법이다.
             //GameManager.Instance.mainUI.enemyCount = GameManager.Instance.enemyList.FindAll(count => !count._isDead).Count;
 
+            GameManager.Instance.EnemyDied();
+
             // 카운트를 예측해서 따로 세준다
-            GameManager.Instance.EnemyCount--;
-            GameManager.Instance.UpdateEnemyCountUI();
+            //GameManager.Instance.EnemyCount--;
+            //GameManager.Instance.UpdateEnemyCountUI();
         }
     }
 
