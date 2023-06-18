@@ -1082,7 +1082,7 @@ MonoBehaviour:
   Health: 4
   _bulletTimeDuration: 3
   _hitRadius: 0.5
-  _reloadTime: 2
+  _reloadTime: 0.5
   _hitMarkerPrefab: {fileID: 1361274560456668177, guid: 034f5b4bf166c6144af9e74ac71f0eeb, type: 3}
 --- !u!1001 &4252656458142247580
 PrefabInstance:

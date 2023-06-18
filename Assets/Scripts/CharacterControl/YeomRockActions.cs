@@ -91,7 +91,7 @@ public class YeomRockActions : MonoBehaviour
         if (isHitInvulnerable) return;
 
         Health--;
-        UIHPScript.Instance.UpdateHealth(Health);
+        UIHPScript.Instance.UpdateHealth();
         CheckDeath();
         StartCoroutine(HitInvulnerable());
     }
@@ -116,14 +116,20 @@ public class YeomRockActions : MonoBehaviour
 
     void CheckDeath()
     {
-        if(Health <= 0)
-        {
-            //GameOver;
-            //DestroyObject
-            //Show GameOver Prompt
-            //Destroy(gameObject);
-            Time.timeScale = 0f;
-        }
+        if (Health <= 0)
+            StartCoroutine(GameOverSequence());
+    }
+
+    IEnumerator GameOverSequence()
+    {
+        Time.timeScale = 0f;
+
+        //죽은 염록이 애니메이션
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        GameManager.Instance.LoadDeathScene();
+
     }
 
     void ApplyMovement()

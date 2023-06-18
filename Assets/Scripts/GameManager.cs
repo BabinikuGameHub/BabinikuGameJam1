@@ -1,8 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour
                 _instance = FindObjectOfType(typeof(GameManager)) as GameManager;
 
                 if (_instance == null)
-                    Debug.Log("°ÔÀÓ ¸Å´ÏÀú°¡ ¾ø½À´Ï´Ù.");
+                    Debug.Log("Â°Ã”Ã€Ã“ Â¸Ã…Â´ÃÃ€ÃºÂ°Â¡ Â¾Ã¸Â½Ã€Â´ÃÂ´Ã™.");
             }
             return _instance;
         }
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
     public UIMain mainUI;
     public List<MonsterBaseScript> enemyList;
     public int EnemyCount { get; set; } = 0;
-    public int StageCount { get; set; } = 0;
+    public int StageCount { get; set; } = 1;
 
     void Awake()
     {
@@ -38,17 +39,26 @@ public class GameManager : MonoBehaviour
         else if (_instance != this) Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
 
-        if (mainUI == null) mainUI = FindObjectOfType<UIMain>();
+        //if (mainUI == null) mainUI = FindObjectOfType<UIMain>();
 
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     public void UpdateEnemyCountUI()
     {
         mainUI.enemyCount = EnemyCount;
+
+        if(EnemyCount <= 0)
+        {
+            StartCoroutine(StageClearSequence());
+        }
     }
 
     public void UpdateStageCountUI()
     {
+        if (mainUI == null)
+            return;
+
         mainUI.stageCount = StageCount;
     }
 
@@ -57,8 +67,24 @@ public class GameManager : MonoBehaviour
         StageCount = stagenum == -1 ? StageCount++ : stagenum;
     }
 
-    public void NextStageLoad()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        UpdateStageCountUI();
+    }
 
+    IEnumerator StageClearSequence()
+    {
+        //Stage Clear UI
+        //ì˜¤ìš°ì˜ˆì•„ ìŒì„±?
+        StartCoroutine(mainUI.StageClearCoroutine());
+
+        yield return new WaitForSeconds(4);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void LoadDeathScene()
+    {
+        SceneManager.LoadScene("GameOverScene");
     }
 }

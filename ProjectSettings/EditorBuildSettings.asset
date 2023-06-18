@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleSceneCopy.unity
     guid: 3e52a2b1a25b5124587770283ce407bf
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: d9a359b5de66e6e4e852266bf656d1b0
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b25ed2c1b2f0c024b878925e7c332fe8, type: 2}
