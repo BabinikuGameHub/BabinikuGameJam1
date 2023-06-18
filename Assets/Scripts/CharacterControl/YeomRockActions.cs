@@ -39,7 +39,11 @@ public class YeomRockActions : MonoBehaviour
     [SerializeField]
     private GameObject _hitMissFX;
     [SerializeField]
-    private AudioSource _shootSFX;
+    private AudioSource _gunASource;
+    [SerializeField]
+    private AudioSource _playerASource;
+    [SerializeField]
+    private AudioClip _damagedSFX;
 
     [Header("세팅")]
     [SerializeField]
@@ -111,6 +115,8 @@ public class YeomRockActions : MonoBehaviour
         isHitInvulnerable = true;
         Debug.Log("피격무적");
         _playerAnim.SetTrigger("hurt");
+        _playerASource.clip = _damagedSFX;
+        _playerASource.Play();
         yield return new WaitForSeconds(InvTime);
         isHitInvulnerable = false;
         _playerAnim.SetTrigger("hurtEnd");
@@ -277,7 +283,7 @@ public class YeomRockActions : MonoBehaviour
         if (_firePositions.Count > 0)
         {
             Instantiate(_shootFX).transform.position = _hand.position;
-            _shootSFX.Play();
+            _gunASource.Play();
         }
         foreach(GameObject hitMarker in _hitMarkerList)
         {

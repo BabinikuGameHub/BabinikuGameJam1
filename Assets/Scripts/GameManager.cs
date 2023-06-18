@@ -28,7 +28,16 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public GameObject YeomRockPrefab;
     [SerializeField] public GameObject EnemyPrefab;
+    [SerializeField] public GameObject SFXPref;
     [SerializeField] public List<EnemyInfoSO> EnemyInfos;
+
+    [SerializeField] private Transform BGMTrans;
+    [SerializeField] private AudioSource BGMSource;
+    [SerializeField] private AudioClip battleBGM;
+    //[SerializeField] private AudioClip BGM;
+    [SerializeField] private Transform EffectTrans;
+    [SerializeField] private AudioSource effectSource;
+    [SerializeField] private AudioClip clearSFX;
 
     public UIMain mainUI;
     public Light2D LightControl;
@@ -45,6 +54,8 @@ public class GameManager : MonoBehaviour
         //if (mainUI == null) mainUI = FindObjectOfType<UIMain>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+        BGMSource.clip = battleBGM;
+        BGMSource.Play();
     }
 
     public void UpdateEnemyCountUI()
@@ -66,14 +77,9 @@ public class GameManager : MonoBehaviour
         mainUI.stageCount = StageCount;
     }
 
-    public void SetStage(int stagenum = -1)
-    {
-        StageCount = stagenum == -1 ? StageCount++ : stagenum;
-    }
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name != "GameOverScene" || scene.name != "ClearScene")
+        if (scene.name != "GameOverScene" || scene.name != "ClearScene")
         {
             LightControl = FindObjectOfType<Light2D>();
             LightControl.intensity = 0.03f;
@@ -87,17 +93,13 @@ public class GameManager : MonoBehaviour
         //Stage Clear UI
         //오우예아 음성?
         LightControl.intensity = 1f;
+        effectSource.PlayOneShot(clearSFX);
         StartCoroutine(mainUI.StageClearCoroutine());
 
         yield return new WaitForSeconds(4);
+        StageCount++;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    void CheckNextScene()
-    {
-
-        Scene scene = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void LoadDeathScene()
