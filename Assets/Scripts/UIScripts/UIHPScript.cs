@@ -10,8 +10,7 @@ public class UIHPScript : MonoBehaviour
     private YeomRockActions _yeomRock;
     private int _yeomRockHealth;
     [SerializeField] private GameObject _hpIconPrefab;
-
-    private List<GameObject> _hpIcons = new();
+    private List<GameObject> _hpIcons;
 
     private void Awake()
     {
@@ -19,27 +18,22 @@ public class UIHPScript : MonoBehaviour
             Instance = this;
     }
 
-    void Start()
+    public void InstantiateWYeom(GameObject Yeom)
     {
-        _yeomRock = GameObject.FindWithTag("Player").GetComponent<YeomRockActions>();
+        _yeomRock = Yeom.GetComponent<YeomRockActions>();
         _yeomRockHealth = _yeomRock.Health;
+        _hpIcons = new();
 
         for (int i = 0; i < _yeomRockHealth; i++)
         {
             GameObject hpIcon = Instantiate(_hpIconPrefab, transform);
             _hpIcons.Add(hpIcon);
         }
-
-    }
-    public void TestDamage()
-    {
-        _yeomRockHealth--;
-        UpdateHealth(_yeomRockHealth);
     }
 
-    public void UpdateHealth(int health)
+    public void UpdateHealth()
     {
-        _yeomRockHealth = health;
+        _yeomRockHealth = _yeomRock.Health;
 
         //일단 이미지 끄기
         for(int i = 0; i < _hpIcons.Count; i++)

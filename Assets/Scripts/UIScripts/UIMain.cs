@@ -9,6 +9,8 @@ public class UIMain : MonoBehaviour
     private TextMeshProUGUI enemyCountText;
     [SerializeField]
     private TextMeshProUGUI stageCountText;
+    [SerializeField]
+    private TextMeshProUGUI stageClearText;
 
     public int enemyCount { set { enemyCountText.text = value.ToString(); } }
     public int stageCount { set { stageCountText.text = "STAGE " + value.ToString(); } }
@@ -16,6 +18,14 @@ public class UIMain : MonoBehaviour
     private void Awake()
     {
         GameManager.Instance.mainUI = this;
+        stageClearText.enabled = false;
+    }
+    public IEnumerator StageClearCoroutine()
+    {
+        stageClearText.enabled = true;
+
+        yield return new WaitForSecondsRealtime(3f);
+        stageClearText.enabled = false;
     }
 
 }

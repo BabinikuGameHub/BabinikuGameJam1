@@ -12,29 +12,40 @@ public class SpawnManager : MonoBehaviour
     private List<Transform> _enemySpawnPositions;
     private List<MonsterBaseScript> _enemyList;
 
-    // Start is called before the first frame update
     void Awake()
     {
-        _enemySpawnPositions = _spawnPositionsParent.GetComponentsInChildren<Transform>().ToList();
-        _enemyList = new();
+        if (_spawnPositionsParent != null)
+        {
+            _enemySpawnPositions = _spawnPositionsParent.GetComponentsInChildren<Transform>().ToList();
+            _enemyList = new();
+        }
     }
 
     private void Start()
     {
+        SpawnYeomRock();
+
+        if(_spawnPositionsParent != null )
+            StartCoroutine(SpawnEnemies());
+    }
+
+    private void SpawnYeomRock()
+    {
         //염록 소환!
         GameObject Yeom = Instantiate(GameManager.Instance.YeomRockPrefab, _playerSpawnPosition.transform);
         _cam.Follow = Yeom.transform;
-        SpawnEnemies();
+        UIHPScript.Instance.InstantiateWYeom(Yeom);
     }
 
-    private void SpawnEnemies()
+    private IEnumerator SpawnEnemies()
     {
         foreach (Transform position in _enemySpawnPositions)
         {
+            yield return new WaitForSeconds(0.3f);
             SpawnEnemyAtPosition(position);
+            GameManager.Instance.EnemyCount = _enemyList.Count;
+            GameManager.Instance.UpdateEnemyCountUI();
         }
-        GameManager.Instance.EnemyCount = _enemyList.Count;
-        GameManager.Instance.UpdateEnemyCountUI();
     }
 
     public void SpawnEnemyAtPosition(Transform SpawnPoint)
