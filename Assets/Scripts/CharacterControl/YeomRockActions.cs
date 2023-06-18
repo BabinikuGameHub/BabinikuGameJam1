@@ -94,11 +94,13 @@ public class YeomRockActions : MonoBehaviour
 
     IEnumerator HitInvulnerable()
     {
+        float InvTime = 1;
         isHitInvulnerable = true;
         Debug.Log("피격무적");
-
-        yield return new WaitForSeconds(1f);
+        _playerAnim.SetTrigger("hurt");
+        yield return new WaitForSeconds(InvTime);
         isHitInvulnerable = false;
+        _playerAnim.SetTrigger("hurtEnd");
         Debug.Log("무적풀림");
     }
 
