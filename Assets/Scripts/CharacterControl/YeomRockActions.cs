@@ -27,6 +27,10 @@ public class YeomRockActions : MonoBehaviour
     private Animator _handLightAnim;
     [SerializeField]
     private Transform _hand;
+    [SerializeField]
+    private GameObject _warningPref;
+    [SerializeField]
+    private Transform _warningArrows;
 
     [Header("세팅")]
     [SerializeField]
@@ -282,5 +286,10 @@ public class YeomRockActions : MonoBehaviour
         BulletCylinderScript.Instance.ChangeGreen();
         _remainingAmmo = 6;
         isReloading = false;
+    }
+
+    public void SpawnWarningArrow(Transform bullet)
+    {
+        Instantiate(_warningPref, _warningArrows).GetComponent<WarningArrow>().Init(bullet);
     }
 }

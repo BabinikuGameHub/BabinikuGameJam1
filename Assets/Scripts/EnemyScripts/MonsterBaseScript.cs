@@ -161,6 +161,8 @@ public class MonsterBaseScript : MonoBehaviour
             ProjectileScript pScript = projectile.GetComponent<ProjectileScript>();
             pScript.SetTrajectory(_lineOfSight, _projectileSpeed);
 
+            _yeomRock.GetComponent<YeomRockActions>().SpawnWarningArrow(projectile.transform);
+
             _rofCount = _rateOfFire;
         }
         else
