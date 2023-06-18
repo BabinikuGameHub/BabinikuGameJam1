@@ -25,8 +25,10 @@ public class SpawnManager : MonoBehaviour
     {
         SpawnYeomRock();
 
-        if(_spawnPositionsParent != null )
-            StartCoroutine(SpawnEnemies());
+        if (_spawnPositionsParent == null || _enemySpawnPositions.Count == 0)
+            return;
+
+        StartCoroutine(SpawnEnemies());
     }
 
     private void SpawnYeomRock()
