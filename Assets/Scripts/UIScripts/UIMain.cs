@@ -13,4 +13,9 @@ public class UIMain : MonoBehaviour
     public int enemyCount { set { enemyCountText.text = value.ToString(); } }
     public int stageCount { set { stageCountText.text = "STAGE " + value.ToString(); } }
 
+    private void Awake()
+    {
+        GameManager.Instance.mainUI = this;
+    }
+
 }
