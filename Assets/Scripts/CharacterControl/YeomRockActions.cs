@@ -32,6 +32,13 @@ public class YeomRockActions : MonoBehaviour
     [SerializeField]
     private Transform _warningArrows;
 
+    [SerializeField]
+    private GameObject _shootFX;
+    [SerializeField]
+    private GameObject _hitCorrectFX;
+    [SerializeField]
+    private GameObject _hitMissFX;
+
     [Header("세팅")]
     [SerializeField]
     private float _movementSpeed;
@@ -250,7 +257,7 @@ public class YeomRockActions : MonoBehaviour
         {
             //포지션에 총기 이펙트
             Collider2D[] rangeChecks = Physics2D.OverlapCircleAll(hitPosition, _hitRadius);
-
+            GameObject effect = _hitMissFX;
             if(rangeChecks.Length > 0)
             {
                 foreach(Collider2D collider in rangeChecks.ToList())
@@ -259,18 +266,20 @@ public class YeomRockActions : MonoBehaviour
                     {
                         MonsterBaseScript mBaseScript = collider.gameObject.GetComponent<MonsterBaseScript>();
                         mBaseScript.TakeDamage();
+                        effect = _hitCorrectFX;
                     }
                 }
             }
-
+            Instantiate(effect).transform.position = hitPosition;
         }
-
+        if (_firePositions.Count > 0)
+            Instantiate(_shootFX).transform.position = _hand.position;
         foreach(GameObject hitMarker in _hitMarkerList)
         {
             Destroy(hitMarker);
         }
         _hitMarkerList = new();
-
+        _firePositions.Clear();
         ReloadSequence();
 
     }

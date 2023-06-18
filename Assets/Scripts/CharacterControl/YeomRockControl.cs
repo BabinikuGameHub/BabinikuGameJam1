@@ -24,11 +24,14 @@ public class YeomRockControl : MonoBehaviour
         _yControls.Player.Move.performed += context => PlayerMovement = context.ReadValue<Vector2>();
         _yControls.Player.Move.canceled += context => PlayerMovement = Vector2.zero;
 
-        //라이트 던지기
-        _yControls.Player.ThrowLight.started += context => LightThrowAction.Invoke();
+        ////라이트 던지기
+        //_yControls.Player.ThrowLight.started += context => LightThrowAction.Invoke();
 
         //불렛타임. 단, 라이트 던지는 중에만 가능.
         _yControls.Player.BulletTime.started += context => BulletTime.Invoke();
+
+        //불렛타임. 단, 라이트 던지는 중에만 가능.
+        _yControls.Player.BulletTime.started += context => LightThrowAction.Invoke();
 
         //총 발사. 불렛타임 중에만 가능
         _yControls.Player.Fire.started += context => FireBullet.Invoke();

@@ -1001,7 +1001,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -1075,6 +1075,9 @@ MonoBehaviour:
   _hand: {fileID: 8435096197053603952}
   _warningPref: {fileID: 8241085416148287556, guid: 2c66b08c698095b4dbf4a90b0f02ba1d, type: 3}
   _warningArrows: {fileID: 4788464084370573495}
+  _shootFX: {fileID: 4364503826835507935, guid: 34ac51d0ca18f2a4c8f6c60767b622f8, type: 3}
+  _hitCorrectFX: {fileID: 4465187596875812986, guid: 362bb857b27f1434b83eac6a63d452fb, type: 3}
+  _hitMissFX: {fileID: 3904374796561644979, guid: dd05c8a89334b7e49b1825d26a20850a, type: 3}
   _movementSpeed: 10
   _handleSpeed: 10
   _throwTime: 1.5
