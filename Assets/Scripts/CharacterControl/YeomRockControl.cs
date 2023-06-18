@@ -42,6 +42,10 @@ public class YeomRockControl : MonoBehaviour
     {
         UpdateLoS();
     }
+    private void OnDisable()
+    {
+        _yControls.Disable();
+    }
 
     void UpdateLoS()
     {

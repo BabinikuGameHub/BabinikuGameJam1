@@ -82,7 +82,8 @@ public class GameManager : MonoBehaviour
         if (scene.name != "GameOverScene" || scene.name != "ClearScene")
         {
             LightControl = FindObjectOfType<Light2D>();
-            LightControl.intensity = 0.03f;
+            if (LightControl != null)
+                LightControl.intensity = 0.03f;
         }
 
         UpdateStageCountUI();
