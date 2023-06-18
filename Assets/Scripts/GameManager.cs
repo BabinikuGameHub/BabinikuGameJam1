@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public List<EnemyInfoSO> EnemyInfos;
 
     public UIMain mainUI;
+    public Light2D LightControl;
     public List<MonsterBaseScript> enemyList;
     public int EnemyCount { get; set; } = 0;
     public int StageCount { get; set; } = 1;
@@ -70,6 +73,12 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if(scene.name != "GameOverScene" || scene.name != "ClearScene")
+        {
+            LightControl = FindObjectOfType<Light2D>();
+            LightControl.intensity = 0.03f;
+        }
+
         UpdateStageCountUI();
     }
 
@@ -77,6 +86,7 @@ public class GameManager : MonoBehaviour
     {
         //Stage Clear UI
         //오우예아 음성?
+        LightControl.intensity = 1f;
         StartCoroutine(mainUI.StageClearCoroutine());
 
         yield return new WaitForSeconds(4);
