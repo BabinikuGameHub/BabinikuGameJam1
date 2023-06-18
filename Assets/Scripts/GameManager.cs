@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
-    // 싱글톤 구현
     private static GameManager _instance;
     public static GameManager Instance
     {
@@ -20,56 +20,45 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
+
     private GameObject _yeomRock;
 
-    [SerializeField] private GameObject _enemyPrefab;
-    [SerializeField] private List<EnemyInfoSO> _enemyInfos;
-    [SerializeField] private GameObject _spawnPositionsParent;
-    [SerializeField] private List<Transform> _enemySpawnPositions;
-    
+    [SerializeField] public GameObject YeomRockPrefab;
+    [SerializeField] public GameObject EnemyPrefab;
+    [SerializeField] public List<EnemyInfoSO> EnemyInfos;
+
     public UIMain mainUI;
     public List<MonsterBaseScript> enemyList;
-    public int enemyCount { get; set; } = 0;
+    public int EnemyCount { get; set; } = 0;
+    public int StageCount { get; set; } = 0;
 
     void Awake()
     {
-        // 실행시 초기화, 중복시 그건 파괴
         if (_instance == null) _instance = this;
         else if (_instance != this) Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
 
-        _enemySpawnPositions = _spawnPositionsParent.GetComponentsInChildren<Transform>().ToList();
         if (mainUI == null) mainUI = FindObjectOfType<UIMain>();
 
     }
 
-    private void Start()
+    public void UpdateEnemyCountUI()
     {
-        SpawnEnemies();
+        mainUI.enemyCount = EnemyCount;
     }
 
-    private void SpawnEnemies()
+    public void UpdateStageCountUI()
     {
-        foreach (Transform position in _enemySpawnPositions)
-        {
-            SpawnEnemyAtPosition(position);
-        }
-        enemyCount = enemyList.Count;
-        UpdateUI();
+        mainUI.stageCount = StageCount;
     }
 
-    public void SpawnEnemyAtPosition(Transform SpawnPoint)
+    public void SetStage(int stagenum = -1)
     {
-        GameObject SpawnedEnemy = Instantiate(_enemyPrefab, SpawnPoint);
-        MonsterBaseScript baseScript = SpawnedEnemy.GetComponent<MonsterBaseScript>();
-        
-        enemyList.Add(baseScript);
-
-        int index = Random.Range(0, _enemyInfos.Count);
-        baseScript.InitializeWithSO(_enemyInfos[index]);
+        StageCount = stagenum == -1 ? StageCount++ : stagenum;
     }
-    public void UpdateUI()
+
+    public void NextStageLoad()
     {
-        mainUI.enemyCount = enemyCount;
+
     }
 }

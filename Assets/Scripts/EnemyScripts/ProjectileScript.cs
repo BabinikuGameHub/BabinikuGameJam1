@@ -33,8 +33,6 @@ public class ProjectileScript : MonoBehaviour
     {
         _bulletVelocity = velocity;
         _projectileRb.velocity = new Vector2(shootDir.x, shootDir.y).normalized * _bulletVelocity;
-        //float rot = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(0, 0, rot);
 
 
     }
@@ -47,6 +45,11 @@ public class ProjectileScript : MonoBehaviour
             //염록이 데미지
             YeomRockActions actions = collision.gameObject.GetComponent<YeomRockActions>();
             actions.ApplyDamage();
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Wall"))
+        {
             Destroy(gameObject);
         }
     }

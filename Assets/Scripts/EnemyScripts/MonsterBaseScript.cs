@@ -96,7 +96,7 @@ public class MonsterBaseScript : MonoBehaviour
 
         _enemySpriteRenderer.sprite = _aliveEnemySprite;
 
-        GameManager.Instance.enemyCount++;
+        GameManager.Instance.EnemyCount++;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -202,8 +202,8 @@ public class MonsterBaseScript : MonoBehaviour
             //GameManager.Instance.mainUI.enemyCount = GameManager.Instance.enemyList.FindAll(count => !count._isDead).Count;
 
             // 카운트를 예측해서 따로 세준다
-            GameManager.Instance.enemyCount--;
-            GameManager.Instance.UpdateUI();
+            GameManager.Instance.EnemyCount--;
+            GameManager.Instance.UpdateEnemyCountUI();
         }
     }
 
