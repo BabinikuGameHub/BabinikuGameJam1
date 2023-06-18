@@ -107,38 +107,38 @@ using UnityEngine;
 //        return audioClip;
 //    }
 //}
-public class SoundManager
-{
-    AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
-    Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
-    public void Init()
-    {
-        GameObject root = GameObject.Find("@Sound");
-        if (root == null)
-        {
-            root = new GameObject { name = "@Sound" };
-            Object.DontDestroyOnLoad(root);
+//public class SoundManager
+//{
+//    AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
+//    Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
+//    public void Init()
+//    {
+//        GameObject root = GameObject.Find("@Sound");
+//        if (root == null)
+//        {
+//            root = new GameObject { name = "@Sound" };
+//            Object.DontDestroyOnLoad(root);
 
-            string[] soundNames = System.Enum.GetNames(typeof(Define.Sound)); // "Bgm", "Effect"
-            for (int i = 0; i < soundNames.Length - 1; i++)
-            {
-                GameObject go = new GameObject { name = soundNames[i] };
-                _audioSources[i] = go.AddComponent<AudioSource>();
-                go.transform.parent = root.transform;
-            }
+//            string[] soundNames = System.Enum.GetNames(typeof(Define.Sound)); // "Bgm", "Effect"
+//            for (int i = 0; i < soundNames.Length - 1; i++)
+//            {
+//                GameObject go = new GameObject { name = soundNames[i] };
+//                _audioSources[i] = go.AddComponent<AudioSource>();
+//                go.transform.parent = root.transform;
+//            }
 
-            _audioSources[(int)Define.Sound.Bgm].loop = true; // bgm 재생기는 무한 반복 재생
-        }
-    }
-    public void Clear()
-    {
-        // 재생기 전부 재생 스탑, 음반 빼기
-        foreach (AudioSource audioSource in _audioSources)
-        {
-            audioSource.clip = null;
-            audioSource.Stop();
-        }
-        // 효과음 Dictionary 비우기
-        _audioClips.Clear();
-    }
-}
+//            _audioSources[(int)Define.Sound.Bgm].loop = true; // bgm 재생기는 무한 반복 재생
+//        }
+//    }
+//    public void Clear()
+//    {
+//        // 재생기 전부 재생 스탑, 음반 빼기
+//        foreach (AudioSource audioSource in _audioSources)
+//        {
+//            audioSource.clip = null;
+//            audioSource.Stop();
+//        }
+//        // 효과음 Dictionary 비우기
+//        _audioClips.Clear();
+//    }
+//}
