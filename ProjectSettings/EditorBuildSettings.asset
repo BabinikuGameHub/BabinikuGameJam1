@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/BattleSceneCopy.unity
     guid: 3e52a2b1a25b5124587770283ce407bf
   - enabled: 1
+    path: Assets/Scenes/ClearScene.unity
+    guid: 01aa8490654fcc84b80131717b7cdb94
+  - enabled: 1
     path: Assets/Scenes/GameOverScene.unity
     guid: d9a359b5de66e6e4e852266bf656d1b0
   m_configObjects:

@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
         if (mainUI == null)
             return;
 
+        Time.timeScale = 1f;
         mainUI.stageCount = StageCount;
     }
 
@@ -83,8 +84,19 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    void CheckNextScene()
+    {
+
+        Scene scene = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void LoadDeathScene()
     {
         SceneManager.LoadScene("GameOverScene");
+    }
+
+    public void LoadClearScene()
+    {
+        SceneManager.LoadScene("ClearScene");
     }
 }
